@@ -57,10 +57,10 @@ class Block {
         let self = this;
         let block = JSON.parse(hex2ascii(self.body));
         return new Promise((resolve, reject) =>{
-            if (block.data === 'Genesis Block'){
-                reject(Error("Genesis Block"));
+            if (this.height !== 0){
+                resolve(block);
             }
-            resolve(block);
+            
         });
     }
 
