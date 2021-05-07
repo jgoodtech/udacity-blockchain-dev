@@ -73,5 +73,7 @@ You should see in your terminal a message indicating that the server is listenin
     ![Use the web based Bitcoin Signature Tool to sign a message](https://github.com/jgoodtech/udacity-blockchain-dev/blob/master/Project_1/testing_pics/signMessage.png)
 5. Submit your Star
      ![Request: http://localhost:8000/submitstar](https://github.com/jgoodtech/udacity-blockchain-dev/blob/master/Project_1/testing_pics/submitStarRequest.png)
-6. Retrieve Stars owned by me
+6. Retrieve Stars owned by address
     ![Request: http://localhost:8000/blocks/<WALLET_ADDRESS>](https://github.com/jgoodtech/udacity-blockchain-dev/blob/master/Project_1/testing_pics/getStarsByAddress.png)
+7. Validate chain service
+    ![Request: http://localhost:8000/validatechain](https://github.com/jgoodtech/udacity-blockchain-dev/blob/master/Project_1/testing_pics/validateChain.png)
