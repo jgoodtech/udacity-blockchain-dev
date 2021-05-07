@@ -68,21 +68,15 @@ class Blockchain {
             block.height = self.height + 1;
             block.time = new Date().getTime().toString().slice(0, -3);
             block.hash = SHA256(JSON.stringify(block)).toString();
-            console.log("Height in _addBlock: " + self.height);
-            if (self.height > 0) {
-                console.log("Height > 0");
-                block.previousBlockHash = self.chain[self.height - 1].hash;
+            if (self.height >= 0) {
+                block.previousBlockHash = self.chain[self.height].hash;
             }
+            self.chain.push(block);
+            self.height += 1;
             errors = await self.validateChain();
-            console.log("Errors: " + errors.length);
-
             if (errors.length === 0) {
-                console.log("No validation errors and will now addBlock");
-                self.chain.push(block);
-                self.height += 1;
                 resolve(block);
             } else {
-                console.log(errors);
                 reject(errors);
             }
         });
@@ -128,7 +122,7 @@ class Blockchain {
             if (cTime - mTime <= 300) {
                 const isVerified = bitcoinMessage.verify(message, address, signature);
                 if (isVerified) {
-                    const data = { address: address, star: star };
+                    const data = { owner: address, star: star };
                     const block = new BlockClass.Block(data);
                     await self._addBlock(block);
                     resolve(block)
@@ -188,8 +182,9 @@ class Blockchain {
         return new Promise((resolve, reject) => {
             self.chain.forEach(async (block) => {
                 const data = await block.getBData();
-                if (data.address === address) {
-                    stars.push(data.star);
+                console.log(data);
+                if (data.owner === address) {
+                    stars.push(data);
                 }
                 resolve(stars);
             });
